@@ -1,3 +1,6 @@
+# NOTICE
+AUTHOR HAS NO AFFILIATION WITH NVIDIA&reg;  
+
 # In Stock Notifier
 A NodeJS script that checks if a certain GeForce 10 series item is in stock on nvidia's website. 
 The script can be scheduled to run periodically via cron on Linux, or Task Scheduler on Windows.
@@ -10,7 +13,7 @@ The script can be scheduled to run periodically via cron on Linux, or Task Sched
 
 ### First Time
 Update src/config/config.ini for the following:
-* Item ID and Item Name (currently set to GeForce 1080 TI)
+* Item ID and Item Name (currently set to NVIDIA&reg; GeForce&reg; GTX 1080 TI)
 * Receiver email address
 * Sender gmail address
 * Sender [gmail app password](https://support.google.com/mail/answer/185833?hl=en)
