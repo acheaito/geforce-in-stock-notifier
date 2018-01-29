@@ -18,27 +18,36 @@ async function checkStock() {
         return;
     }
 
-    console.log(`Opening ${config.store.url}`);
-    const phantom = require('phantom');
-    const instance = await phantom.create();
-    const page = await instance.createPage();
-    await page.on('onResourceRequested', function (requestData) {
-        console.info('Requesting', requestData.url);
-    });
+    openWithChromePuppeteer();
+}
 
-    const status = await page.open(config.store.url);
-    const content = await page.property('content');
 
-    console.log("Page load finished");
-    const inStock = getStock(content);
-    if (inStock) {
-        console.log(`Item ${config.store.itemName} in stock!!! Sending email`);
-        sendEmail();
-    } else {
-        console.log(`Item ${config.store.itemName} not in stock`);
-    }
+async function openWithChromePuppeteer() {
+    const puppeteer = require('puppeteer');
 
-    await instance.exit();
+    (async () => {
+        const browser = await puppeteer.launch();
+        const page = await browser.newPage();
+
+        console.log(`Opening ${config.store.url}`);
+        await page.goto(config.store.url);
+
+        const content = await page.evaluate(() => {
+            return document.documentElement.innerHTML;
+        });
+
+        fs.writeFileSync('page.html', content);
+
+        const inStock = getStock(content);
+        if (inStock) {
+            console.log(`Item ${config.store.itemName} in stock!!! Sending email`);
+            sendEmail();
+        } else {
+            console.log(`Item ${config.store.itemName} not in stock`);
+        }
+
+        await browser.close();
+    })();
 }
 
 function setUpLogging() {
