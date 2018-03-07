@@ -1,7 +1,7 @@
 'use strict';
 
-const checker = require('./check-stock.js');
+const controller = require('./check-stock.js');
 
 module.exports = {
-    checkStock: checker.checkStock
+    checkStock: controller.checkStock
 };
