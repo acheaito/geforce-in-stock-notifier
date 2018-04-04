@@ -3,32 +3,34 @@
 const fs = require('fs');
 const util = require('util');
 const emailMarkerFile = 'lastEmailTimestamp.marker';
-const config = require("properties").parse(fs.readFileSync("src/config/config.ini", "utf-8"), {sections: true});
+const config = require("../config").getConfiguration();
 
 module.exports = {
-    checkQuietPeriod: checkQuietPeriod,
-    setQuietPeriod: setQuietPeriod,
-    resetQuietPeriod: resetQuietPeriod
+    isInQuietPeriod: isInQuietPeriod,
+    startQuietPeriod: startQuietPeriod,
+    endQuietPeriod: endQuietPeriod
 };
 
-function checkQuietPeriod() {
+function isInQuietPeriod(quietPeriodMinutes) {
     if (fs.existsSync(emailMarkerFile)) {
         let stats = fs.statSync(emailMarkerFile);
         const now = new Date();
-        const lastEmail = new Date(util.inspect(stats.mtime));
+        const lastEmail = new Date(stats.mtime);
         const diff = now.getTime() - lastEmail.getTime();
         const diffMinutes = diff / (1000 * 60);
-        if (diffMinutes < config.receiver.minutesBetweenSuccessEmails) {
+        if (diffMinutes < quietPeriodMinutes) {
             return true;
         }
     }
     return false;
 }
 
-function setQuietPeriod() {
-    fs.closeSync(fs.openSync(emailMarkerFile, 'w'));   //touch email timestamp file
+function startQuietPeriod() {
+    fs.closeSync(fs.openSync(emailMarkerFile, 'w'));   //touch marker file
 }
 
-function resetQuietPeriod() {
-    fs.unlinkSync(emailMarkerFile);
+function endQuietPeriod() {
+    if (fs.existsSync(emailMarkerFile)) {
+        fs.unlinkSync(emailMarkerFile);
+    }
 }

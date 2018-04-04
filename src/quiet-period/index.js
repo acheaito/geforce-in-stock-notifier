@@ -1,9 +1,9 @@
 'use strict';
 
-const controller = require('./quiet-period-controller.js');
+const controller = require('./quiet-period-controller');
 
 module.exports = {
-    checkQuietPeriod: controller.checkQuietPeriod,
-    setQuietPeriod: controller.setQuietPeriod,
-    resetQuietPeriod: controller.resetQuietPeriod
+    isInQuietPeriod: controller.isInQuietPeriod,
+    startQuietPeriod: controller.startQuietPeriod,
+    endQuietPeriod: controller.endQuietPeriod
 };

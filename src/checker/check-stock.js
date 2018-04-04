@@ -2,7 +2,7 @@
 
 const fs = require('fs');
 const util = require('util');
-const config = require("properties").parse(fs.readFileSync("src/config/config.ini", "utf-8"), {sections: true});
+const config = require("../config").getConfiguration();
 const quietPeriod = require('../quiet-period');
 const emailer = require('../emailer');
 
@@ -13,7 +13,7 @@ module.exports = {
 async function checkStock() {
     console.log("NVIDIA Stock Checker");
     setUpLogging();
-    const inQuietPeriod = quietPeriod.checkQuietPeriod();
+    const inQuietPeriod = quietPeriod.isInQuietPeriod(config.receiver.minutesBetweenSuccessEmails);
     checkStockInNvidiaStore(inQuietPeriod);
 }
 
@@ -40,11 +40,11 @@ async function checkStockInNvidiaStore(inQuietPeriod) {
         if (inStock && !inQuietPeriod) {
             console.log('Sending In Stock email');
             emailer.sendInStockEmail();
-            quietPeriod.setQuietPeriod();
+            quietPeriod.startQuietPeriod();
         } else if (!inStock && inQuietPeriod) {
             console.log('Sending Out Of Stock email');
             emailer.sendOutOfStockEmail();
-            quietPeriod.resetQuietPeriod();
+            quietPeriod.endQuietPeriod();
         } else {
             console.log(`Email will not be sent. InStock=${inStock} && inQuietPeriod=${inQuietPeriod}`)
         }

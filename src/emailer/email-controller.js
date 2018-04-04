@@ -1,7 +1,6 @@
 'use strict';
 
-const fs = require('fs');
-const config = require("properties").parse(fs.readFileSync("src/config/config.ini", "utf-8"), {sections: true});
+const config = require("../config").getConfiguration();
 
 module.exports = {
     sendInStockEmail: sendInStockEmail,
