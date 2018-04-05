@@ -1,4 +1,4 @@
-![build status](https://gitlab.com/acheaito/geforce-in-stock-notifier/badges/master/build.svg)
+[![Build Travis](https://img.shields.io/travis/acheaito/geforce-in-stock-notifier/master.svg)](https://travis-ci.org/acheaito/geforce-in-stock-notifier)
 # NOTICE
 AUTHOR HAS NO AFFILIATION WITH NVIDIA&reg;  
 
