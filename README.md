@@ -1,3 +1,4 @@
+![build status](https://gitlab.com/acheaito/geforce-in-stock-notifier/badges/master/build.svg)
 # NOTICE
 AUTHOR HAS NO AFFILIATION WITH NVIDIA&reg;  
 
