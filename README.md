@@ -13,7 +13,7 @@ The script can be scheduled to run periodically via cron on Linux, or Task Sched
 ## Usage
 
 ### First Time
-Update src/config/config.ini for the following:
+Update app/config/config.ini for the following:
 * Item ID and Item Name (currently set to NVIDIA&reg; GeForce&reg; GTX 1080 TI)
 * Receiver email address
 * Sender gmail address

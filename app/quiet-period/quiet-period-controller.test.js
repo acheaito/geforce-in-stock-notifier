@@ -1,7 +1,5 @@
 'use strict';
 
-jest.mock('fs');
-
 const quietPeriod = require('../quiet-period');
 
 beforeEach(() => {
