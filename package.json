@@ -4,7 +4,7 @@
   "description": "",
   "main": "check-stock.js",
   "scripts": {
-    "start": "node src",
+    "start": "node app",
     "test": "jest"
   },
   "author": "",
@@ -20,7 +20,14 @@
     "jest": "^22.4.3"
   },
   "jest": {
-    "moduleFileExtensions": ["js", "jsx"],
-    "moduleDirectories": ["node_modules", "bower_components", "app"]
+    "moduleFileExtensions": [
+      "js",
+      "jsx"
+    ],
+    "moduleDirectories": [
+      "node_modules",
+      "bower_components",
+      "app"
+    ]
   }
 }

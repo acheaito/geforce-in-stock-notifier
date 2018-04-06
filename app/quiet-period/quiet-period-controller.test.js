@@ -23,7 +23,7 @@ test('disables quiet period', () => {
 
 test('out of quiet period', () => {
     quietPeriod.startQuietPeriod();
-    expect(quietPeriod.isInQuietPeriod(0)).toBe(false);
+    expect(quietPeriod.isInQuietPeriod(-1)).toBe(false);
 });
 
 test('gracefully handle reset when quiet period is not enabled', () => {
